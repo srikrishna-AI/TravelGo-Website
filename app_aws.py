@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'mydefaultsecret')
 
 # AWS Resources
-region = 'ap-south-1'  # Update with your region
+region = 'us-east-1'  # Update with your region
 
 dynamodb = boto3.resource('dynamodb', region_name=region)
 sns = boto3.client('sns', region_name=region)
@@ -240,4 +240,4 @@ def logout():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
