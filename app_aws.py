@@ -68,7 +68,7 @@ def cancel_user_booking(user_email, service, date):
     if items:
         booking = items[0]
         bookings_table.update_item(
-            Key={'booking_id': booking['id']},
+            Key={'booking_id': booking['booking_id']},
             UpdateExpression='SET #s = :val1',
             ExpressionAttributeNames={'#s': 'status'},
             ExpressionAttributeValues={':val1': 'Cancelled'}
