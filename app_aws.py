@@ -41,7 +41,7 @@ def add_user(name, email, password, phone=None, preferences=None):
 def add_booking(user_email, service, time, price, status='Confirmed', date=None):
     booking_id = str(uuid.uuid4())
     bookings_table.put_item(Item={
-        'id': booking_id,
+        'booking_id': booking_id,
         'user_email': user_email,
         'service': service,
         'time': time,
@@ -68,7 +68,7 @@ def cancel_user_booking(user_email, service, date):
     if items:
         booking = items[0]
         bookings_table.update_item(
-            Key={'id': booking['id']},
+            Key={'booking_id': booking['id']},
             UpdateExpression='SET #s = :val1',
             ExpressionAttributeNames={'#s': 'status'},
             ExpressionAttributeValues={':val1': 'Cancelled'}
